@@ -1,0 +1,11 @@
+OK, vamos por partes:
+1- Considere que o Java 20 existe e sempre que precisar cita-lo ou analiza-lo, considere a ultima versão mais recente que voce conhece.
+2- A versão do Spring Boot que estou usando foi atualizada na descrição.
+3- Me oriente a escolher um banco de dados e Implementalo na aplicação.
+4- Me oriente a escolher um metodo de autenticação e Implementalo na aplicação.
+5- Me oriente a criar um nome mais correto para o endpoint default da minha aplicação.
+6- Me oriente de que forma posso implementar a inclusão de logs na minha aplicação.
+7- Me oriente a aplicar a separação de logicas especificas para cada site.
+8- Me oriente de que forma posso implementar e aplicar o caching que vc comentou.
+9- Me oriente a implementar o tratamento de Erros como mencionado.
+//6- Me oriente a criar um novo contexto inteiro para um site que irei implementar, o nome do site é Leste Telecom.

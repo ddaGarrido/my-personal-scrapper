@@ -1,0 +1,39 @@
+# Use a base image with OpenJDK 20 (assumindo que existe uma imagem para JDK 20)
+FROM openjdk:20-jdk
+
+# Defina variáveis de ambiente para evitar problemas com o display
+ENV DISPLAY=:99
+
+# Instale o Chrome e o ChromeDriver
+# RUN apk update && apk add -y \
+#     wget \
+#     unzip \
+#     xvfb \
+#     libxi6 \
+#     libgconf-2-4 \
+#     && wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
+#     && dpkg -i google-chrome-stable_current_amd64.deb \
+#     && apk add -y -f \
+#     && rm google-chrome-stable_current_amd64.deb \
+#     && wget -q https://chromedriver.storage.googleapis.com/$(wget -qO- https://chromedriver.storage.googleapis.com/LATEST_RELEASE)/chromedriver_linux64.zip \
+#     && unzip chromedriver_linux64.zip \
+#     && mv chromedriver /usr/bin/chromedriver \
+#     && chown root:root /usr/bin/chromedriver \
+#     && chmod +x /usr/bin/chromedriver \
+#     && rm chromedriver_linux64.zip
+
+# Defina o diretório de trabalho
+WORKDIR /app
+
+# Copie os arquivos Maven
+COPY .mvn/ .mvn
+COPY mvnw pom.xml ./
+
+# Resolva as dependências
+RUN ./mvnw dependency:resolve
+
+# Copie o código-fonte
+COPY src ./src
+
+# Comando para iniciar a aplicação
+CMD ["./mvnw", "spring-boot:run"]

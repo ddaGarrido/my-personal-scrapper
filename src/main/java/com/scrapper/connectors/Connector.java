@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 import com.scrapper.api.dto.AuthenticateDTO;
 import com.scrapper.api.dto.SiteStatusDTO;
-import com.scrapper.util.Http;
+import com.scrapper.util.http.Http;
 
 @Component
 public interface Connector {

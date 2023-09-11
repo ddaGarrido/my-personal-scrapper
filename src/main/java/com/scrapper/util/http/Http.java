@@ -1,4 +1,4 @@
-package com.scrapper.util;
+package com.scrapper.util.http;
 
 import java.io.IOException;
 import java.util.Map;
@@ -21,17 +21,17 @@ public class Http {
         connection = Jsoup.newSession();
     }
 
-    public Response get(String url, FormData formData, Map<String, String> headers, Map<String, String> cookies) {
+    public Response get(String url, FormData formData, Headers headers, Cookies cookies) {
         try {
             connection = Jsoup.connect(url).method(Connection.Method.GET);
             if (formData != null) {
                 connection.data(formData.getData());
             }
             if (headers != null) {
-                connection.headers(headers);
+                connection.headers(headers.getAll());
             }
             if (cookies != null) {
-                connection.cookies(cookies);
+                connection.cookies(cookies.getAll());
             }
             Response response = connection.execute();
             response.bufferUp();
@@ -50,14 +50,14 @@ public class Http {
         return get(url, formData, null, null);
     }
 
-    public Response post(String url, Map<String, String> headers, Map<String, String> cookies) {
+    public Response post(String url, Headers headers, Cookies cookies) {
         try {
             connection = Jsoup.connect(url).method(Connection.Method.POST);
             if (headers != null) {
-                connection.headers(headers);
+                connection.headers(headers.getAll());
             }
             if (cookies != null) {
-                connection.cookies(cookies);
+                connection.cookies(cookies.getAll());
             }
             Response response = connection.execute();
             response.bufferUp();
@@ -72,17 +72,17 @@ public class Http {
         return post(url, null, null);
     }
 
-    public Response post(String url, String jsonBody, Map<String, String> headers, Map<String, String> cookies) {
+    public Response post(String url, String jsonBody, Headers headers, Cookies cookies) {
         try {
             connection = Jsoup.connect(url)
                 .header("Content-Type", "application/json")
                 .requestBody(jsonBody)
                 .method(Connection.Method.POST);
             if (headers != null) {
-                connection.headers(headers);
+                connection.headers(headers.getAll());
             }
             if (cookies != null) {
-                connection.cookies(cookies);
+                connection.cookies(cookies.getAll());
             }
             Response response = connection.execute();
             response.bufferUp();
@@ -97,14 +97,14 @@ public class Http {
         return post(url, jsonBody, null, null);
     }
 
-    public Response post(String url, FormData formData, Map<String, String> headers, Map<String, String> cookies) {
+    public Response post(String url, FormData formData, Headers headers, Cookies cookies) {
         try {
             connection = Jsoup.connect(url).data(formData.getData()).method(Connection.Method.POST);
             if (headers != null) {
-                connection.headers(headers);
+                connection.headers(headers.getAll());
             }
             if (cookies != null) {
-                connection.cookies(cookies);
+                connection.cookies(cookies.getAll());
             }
             Response response = connection.ignoreContentType(true).execute();
             response.bufferUp();

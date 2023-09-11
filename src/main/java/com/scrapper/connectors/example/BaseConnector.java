@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 import com.scrapper.api.dto.AuthenticateDTO;
 import com.scrapper.api.dto.SiteStatusDTO;
 import com.scrapper.connectors.Connector;
-import com.scrapper.util.FormData;
-import com.scrapper.util.Http;
+import com.scrapper.util.http.FormData;
+import com.scrapper.util.http.Http;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -75,7 +75,7 @@ public class BaseConnector implements Connector {
         formData.put("email", username);
         formData.put("password", password);
 
-        Response resp = http.post(BASE_URL, formData, headers, null);
+        Response resp = http.post(BASE_URL, formData, null, null);
 
         Document doc = http.getDocument(resp);
 

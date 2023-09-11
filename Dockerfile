@@ -11,6 +11,12 @@ RUN apt-get update; apt-get install -y openjdk-17-jdk
 RUN echo  $(java -version)
 RUN echo $(java --version)
 
+RUN apt-get update -y \
+    && apt-get -qqy dist-upgrade \
+    && apt-get -y install maven
+RUN echo $(mvn -version)
+CMD ["echow", "$(mvn -version)"]
+
 ####################################################################################################
 # Adding Google Chrome and ChromeDriver like described in
 # https://github.com/markhobson/docker-maven-chrome
@@ -46,6 +52,7 @@ WORKDIR /app
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
 
+RUN echo $(ls)
 # Resolva as dependências
 RUN ./mvnw dependency:resolve
 

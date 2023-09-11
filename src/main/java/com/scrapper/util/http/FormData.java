@@ -1,4 +1,4 @@
-package com.scrapper.util;
+package com.scrapper.util.http;
 
 import java.util.Map;
 

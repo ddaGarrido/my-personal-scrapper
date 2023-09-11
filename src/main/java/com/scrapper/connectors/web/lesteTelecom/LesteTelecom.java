@@ -7,8 +7,9 @@ import com.scrapper.api.dto.AuthenticateDTO;
 import com.scrapper.api.dto.SiteStatusDTO;
 import com.scrapper.connectors.Connector;
 import com.scrapper.connectors.example.BaseConnector;
-import com.scrapper.util.FormData;
-import com.scrapper.util.Http;
+import com.scrapper.util.http.FormData;
+import com.scrapper.util.http.Headers;
+import com.scrapper.util.http.Http;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -70,8 +71,8 @@ public class LesteTelecom implements Connector {
     public AuthenticateDTO authenticate(String username, String password) {
         AuthenticateDTO response = new AuthenticateDTO();
 
-        Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Content-Type", "application/x-www-form-urlencoded");
+        Headers headers = new Headers();
+        headers.set("Content-Type", "application/x-www-form-urlencoded");
 
         Response resp = http.get(BASE_URL);
         Document doc = http.getDocument(resp);

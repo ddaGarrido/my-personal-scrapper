@@ -3,6 +3,8 @@ package com.scrapper.api.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -10,6 +12,8 @@ import org.springframework.data.repository.query.Param;
 import com.scrapper.api.dto.AuthenticateDTO;
 import com.scrapper.api.dto.SiteStatusDTO;
 import com.scrapper.service.WebService;
+
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +35,12 @@ public class WebController {
         log.info("Fetching all connectors");
 
         return ResponseEntity.ok(webService.getConnectors());
+    }
+
+    @PostMapping("/executeFlow")
+    public ResponseEntity<Map<String, Object>> executeFlow(@RequestParam String username, @RequestParam String password) {
+        // Map<String, Object> data = webService.executeFullFlow(username, password);
+        return ResponseEntity.ok(null);
     }
 
     @GetMapping("/status/{id}")

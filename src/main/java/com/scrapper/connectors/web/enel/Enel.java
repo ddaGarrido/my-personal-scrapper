@@ -7,8 +7,9 @@ import com.scrapper.api.dto.AuthenticateDTO;
 import com.scrapper.api.dto.SiteStatusDTO;
 import com.scrapper.connectors.Connector;
 import com.scrapper.connectors.example.BaseConnector;
-import com.scrapper.util.FormData;
-import com.scrapper.util.Http;
+import com.scrapper.util.http.Browser;
+import com.scrapper.util.http.FormData;
+import com.scrapper.util.http.Headers;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,8 +23,8 @@ import org.slf4j.LoggerFactory;
 @Component
 public class Enel implements Connector {
 
-    private static final Logger log = LoggerFactory.getLogger(BaseConnector.class);
-    private final Http http;
+    private static final Logger log = LoggerFactory.getLogger(Enel.class);
+    private final Browser browser;
 
     protected static final int ID = 3;
     protected static final String NAME = "Enel";
@@ -31,7 +32,7 @@ public class Enel implements Connector {
 
     @Autowired
     public Enel() {
-        http = new Http();
+        browser = new Browser();
     }
 
     @Override
@@ -39,26 +40,25 @@ public class Enel implements Connector {
         SiteStatusDTO response = new SiteStatusDTO();
         long start = System.currentTimeMillis();
 
-        Response resp = http.get(BASE_URL);
+        Response resp = browser.get(BASE_URL);
         long end = System.currentTimeMillis();
 
-        Document doc = http.getDocument(resp);
+        // String docTitle = browser.getHtmlContent(resp);
 
-        response.setStatusCode(resp.statusCode());
-        response.setTitle(doc.title());
-        response.setSiteName(doc.getElementsByClass("name").text());
+        // response.setStatusCode(resp.getStatusCode());
+        // response.setTitle(docTitle);
         response.setResponseTime(end - start);
 
         response.setDescription(null);
-        response.setLogoURL(doc.select("img").attr("src"));
+        // response.setLogoURL(doc.select("img").attr("src"));
 
-        boolean hasLoginForm = doc.getElementsByClass("form") != null;
-        boolean hasUsernameField = doc.selectFirst("input[name=username]") != null;
-        boolean hasPasswordField = doc.selectFirst("input[name=password]") != null;
+        // boolean hasLoginForm = doc.getElementsByClass("form") != null;
+        // boolean hasUsernameField = doc.selectFirst("input[name=username]") != null;
+        // boolean hasPasswordField = doc.selectFirst("input[name=password]") != null;
 
-        response.setHasLoginForm(hasLoginForm);
-        response.setHasUsernameField(hasUsernameField);
-        response.setHasPasswordField(hasPasswordField);
+        // response.setHasLoginForm(hasLoginForm);
+        // response.setHasUsernameField(hasUsernameField);
+        // response.setHasPasswordField(hasPasswordField);
 
         // Set message
         response.setMessage("Site status check completed successfully");
@@ -70,14 +70,14 @@ public class Enel implements Connector {
     public AuthenticateDTO authenticate(String username, String password) {
         AuthenticateDTO response = new AuthenticateDTO();
 
-        Response resp = http.get(BASE_URL);
+        Response resp = browser.get(BASE_URL);
         Document doc = http.getDocument(resp);
         
         FormData formData = new FormData();
         formData.put("spEntityID", "ENEL_RJO_WEB_BRA");
 
-        Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7");
+        Headers headers = new Headers();
+        headers.set("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7");
 
         resp = http.get("https://accounts.enel.com/samlsso", formData, headers, null);
         doc = http.getDocument(resp);
@@ -100,7 +100,7 @@ public class Enel implements Connector {
         formData2.put("isSaaSApp", "false");
         formData2.put("authenticators", "");
         
-        resp = http.get("https://accounts.enel.com/authenticationendpoint/login.do", formData2, headers2, null);
+        // resp = http.get("https://accounts.enel.com/authenticationendpoint/login.do", formData2, headers2, null);
 
         // FormData formData = new FormData();
         // formData.put("customerType", "personas");
@@ -151,6 +151,22 @@ public class Enel implements Connector {
 
         log.info("Logoff method called for {}", NAME);
         return response;
+    }
+
+    public Map<String, Object> executeFullFlow(String username, String password) {
+        Map<String, Object> collectedData = new HashMap<>();
+
+        // Passo 1: Verificar status do site
+        SiteStatusDTO siteStatus = checkSiteStatus();
+        collectedData.put("siteStatus", siteStatus);
+
+        // Passo 2: Autenticar
+        AuthenticateDTO authResponse = authenticate(username, password);
+        collectedData.put("authentication", authResponse);
+
+        // ... (outros passos conforme necessário)
+
+        return collectedData;
     }
 
     public static String formatarCPF(String cpf){

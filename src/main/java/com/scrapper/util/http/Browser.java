@@ -1,15 +1,10 @@
 package com.scrapper.util.http;
 
-import com.scrapper.util.http.Headers;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.jsoup.Connection.Response;
-
-import com.scrapper.util.http.Cookies;
 
 public class Browser {
     private List<Response> history;

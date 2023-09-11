@@ -1,6 +1,5 @@
 package com.scrapper.connectors.example;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.scrapper.api.dto.AuthenticateDTO;
@@ -27,7 +26,6 @@ public class BaseConnector implements Connector {
     protected static final String NAME = "Scrap This Site";
     protected static final String BASE_URL = "http://www.scrapethissite.com/login/";
 
-    @Autowired
     public BaseConnector() {
         http = new Http();
     }

@@ -1,12 +1,10 @@
 package com.scrapper.connectors.web.enel;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.scrapper.api.dto.AuthenticateDTO;
 import com.scrapper.api.dto.SiteStatusDTO;
 import com.scrapper.connectors.Connector;
-import com.scrapper.connectors.example.BaseConnector;
 import com.scrapper.util.http.Browser;
 import com.scrapper.util.http.FormData;
 import com.scrapper.util.http.Headers;
@@ -30,7 +28,6 @@ public class Enel implements Connector {
     protected static final String NAME = "Enel";
     protected static final String BASE_URL = "https://www.enel.com.br/pt/login.html";
 
-    @Autowired
     public Enel() {
         browser = new Browser();
     }

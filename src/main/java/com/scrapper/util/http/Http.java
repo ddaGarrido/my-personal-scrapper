@@ -1,7 +1,6 @@
 package com.scrapper.util.http;
 
 import java.io.IOException;
-import java.util.Map;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;

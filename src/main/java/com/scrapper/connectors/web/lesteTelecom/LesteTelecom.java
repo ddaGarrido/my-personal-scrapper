@@ -1,6 +1,5 @@
 package com.scrapper.connectors.web.lesteTelecom;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.scrapper.api.dto.AuthenticateDTO;
@@ -10,9 +9,6 @@ import com.scrapper.connectors.example.BaseConnector;
 import com.scrapper.util.http.FormData;
 import com.scrapper.util.http.Headers;
 import com.scrapper.util.http.Http;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Connection.Response;
@@ -30,7 +26,6 @@ public class LesteTelecom implements Connector {
     protected static final String NAME = "Leste Telecom";
     protected static final String BASE_URL = "https://central.lestetelecom.com.br/";
 
-    @Autowired
     public LesteTelecom() {
         http = new Http();
     }

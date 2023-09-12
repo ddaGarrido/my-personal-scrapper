@@ -2,14 +2,18 @@ package com.scrapper.util;
 
 import com.scrapper.connectors.Connector;
 import com.scrapper.connectors.example.BaseConnector;
+import com.scrapper.connectors.web.enel.Enel;
+import com.scrapper.connectors.web.lesteTelecom.LesteTelecom;
 
 public class ConnectorFactory {
-
-    public static Connector getConnector(String siteName) {
-        switch (siteName.toLowerCase()) {
-            case "example":
+    public static Connector getConnector(int connectorId) {
+        switch (connectorId) {
+            case 1:
                 return new BaseConnector();
-            // Adicione cases para outros conectores conforme você os cria
+            case 2:
+                return new LesteTelecom();
+            case 3:
+                return new Enel();
             default:
                 return null;
         }

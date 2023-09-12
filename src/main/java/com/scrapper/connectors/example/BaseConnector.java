@@ -13,6 +13,7 @@ import java.util.Map;
 
 import org.jsoup.Connection.Response;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,8 +46,11 @@ public class BaseConnector implements Connector {
         response.setSiteName(doc.title());
         response.setResponseTime(end - start);
 
-        response.setDescription(doc.selectFirst("meta[name=description]").attr("content"));
-        response.setLogoURL(doc.selectFirst("img[id=nav-logo]").attr("src"));
+        Element desc = doc.selectFirst("meta[name=description]");
+        Element logo = doc.selectFirst("img[id=nav-logo]");
+
+        response.setDescription(desc != null ? desc.attr("content") : null);
+        response.setLogoURL(logo!= null? BASE_URL + logo.attr("src") : null);
 
         boolean hasLoginForm = doc.getElementsByClass("form") != null;
         boolean hasUsernameField = doc.selectFirst("input[name=email]") != null;

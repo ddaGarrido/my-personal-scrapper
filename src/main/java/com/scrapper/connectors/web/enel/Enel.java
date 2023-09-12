@@ -37,7 +37,7 @@ public class Enel implements Connector {
         SiteStatusDTO response = new SiteStatusDTO();
         long start = System.currentTimeMillis();
 
-        Response resp = browser.get(BASE_URL);
+        //Response resp = browser.get(BASE_URL);
         long end = System.currentTimeMillis();
 
         // String docTitle = browser.getHtmlContent(resp);
@@ -68,7 +68,7 @@ public class Enel implements Connector {
         AuthenticateDTO response = new AuthenticateDTO();
 
         Response resp = browser.get(BASE_URL);
-        Document doc = http.getDocument(resp);
+        //Document doc = http.getDocument(resp);
         
         FormData formData = new FormData();
         formData.put("spEntityID", "ENEL_RJO_WEB_BRA");
@@ -77,7 +77,7 @@ public class Enel implements Connector {
         headers.set("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7");
 
         resp = http.get("https://accounts.enel.com/samlsso", formData, headers, null);
-        doc = http.getDocument(resp);
+        //doc = http.getDocument(resp);
 
         Map<String, String> headers2 = new HashMap<String, String>();
         headers2.put("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");

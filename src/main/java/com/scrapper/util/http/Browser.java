@@ -43,7 +43,7 @@ public class Browser {
         headers.setAll(response.headers());
     }
 
-    private void updateCookies(Map<String, String> newCookies) {
-        cookies.putAll(newCookies);
-    }
+    // private void updateCookies(Map<String, String> newCookies) {
+    //     cookies.putAll(newCookies);
+    // }
 }

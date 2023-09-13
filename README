@@ -1,0 +1,16 @@
+# My Personal Scrapper
+
+## Descrição
+Este projeto é um scrapper pessoal desenvolvido em Spring Boot. Ele é projetado para conectar-se a diferentes sites e recuperar informações.
+
+## Instalação
+1. Clone o repositório.
+2. Navegue até o diretório do projeto.
+3. Execute `./mvnw clean install` para construir o projeto.
+4. Inicie o aplicativo com `./mvnw spring-boot:run`.
+
+## Uso
+Após iniciar o aplicativo, você pode acessar os endpoints definidos em `WebController.java` para interagir com os conectores e recuperar informações.
+
+## Contribuição
+Se você deseja contribuir para este projeto, siga as diretrizes de codificação padrão e adicione comentários claros ao seu código.

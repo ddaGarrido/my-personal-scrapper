@@ -1,10 +1,9 @@
 package com.scrapper.util.http;
 
+import org.jsoup.Connection.Response;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import org.jsoup.Connection.Response;
 
 public class Browser {
     private List<Response> history;
@@ -42,8 +41,4 @@ public class Browser {
         cookies.setAll(response.cookies());
         headers.setAll(response.headers());
     }
-
-    // private void updateCookies(Map<String, String> newCookies) {
-    //     cookies.putAll(newCookies);
-    // }
 }

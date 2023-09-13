@@ -6,7 +6,7 @@ import com.scrapper.connectors.web.enel.Enel;
 import com.scrapper.connectors.web.lesteTelecom.LesteTelecom;
 
 public class ConnectorFactory {
-    public static Connector getConnector(int connectorId) {
+    public static Connector createConnector(int connectorId) {
         switch (connectorId) {
             case 1:
                 return new BaseConnector();
@@ -15,7 +15,7 @@ public class ConnectorFactory {
             case 3:
                 return new Enel();
             default:
-                return null;
+                throw new IllegalArgumentException("Invalid connector ID");
         }
     }
 }

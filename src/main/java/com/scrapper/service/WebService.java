@@ -34,6 +34,7 @@ public class WebService {
         return connectorsDTO;
     }
 
+    @Cacheable("siteStatus")
     @Async
     public CompletableFuture<SiteStatusDTO> checkSiteStatus(int connectorId) {
         Connector connector = getConnector(connectorId);
@@ -57,15 +58,6 @@ public class WebService {
 
         return CompletableFuture.completedFuture(authenticateDto);
     }
-
-    // // Realizar o logoff em um site.
-    // public boolean logoffFromSite(String siteName) {
-    // BaseConnector connector = ConnectorFactory.getConnector(siteName);
-    // if (connector == null) {
-    // throw new IllegalArgumentException("Conector para o site não encontrado");
-    // }
-    // return connector.logoff();
-    // }
 
     private Connector getConnector(int connectorId) {
         return connectors

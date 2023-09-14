@@ -3,9 +3,8 @@ package com.scrapper.connectors.web.lesteTelecom;
 import org.springframework.stereotype.Component;
 
 import com.scrapper.api.dto.AuthenticateDTO;
-import com.scrapper.api.dto.SiteStatusDTO;
+import com.scrapper.api.dto.ConnectorStatusDTO;
 import com.scrapper.connectors.Connector;
-import com.scrapper.connectors.example.BaseConnector;
 import com.scrapper.util.http.FormData;
 import com.scrapper.util.http.Headers;
 import com.scrapper.util.http.Http;
@@ -19,10 +18,10 @@ import org.slf4j.LoggerFactory;
 @Component
 public class LesteTelecom implements Connector {
 
-    private static final Logger log = LoggerFactory.getLogger(BaseConnector.class);
+    private static final Logger log = LoggerFactory.getLogger(LesteTelecom.class);
     private final Http http;
 
-    protected static final int ID = 2;
+    protected static final int ID = 1;
     protected static final String NAME = "Leste Telecom";
     protected static final String BASE_URL = "https://central.lestetelecom.com.br/";
 
@@ -31,8 +30,8 @@ public class LesteTelecom implements Connector {
     }
 
     @Override
-    public SiteStatusDTO checkSiteStatus() {
-        SiteStatusDTO response = new SiteStatusDTO();
+    public ConnectorStatusDTO checkConnStatus() {
+        ConnectorStatusDTO response = new ConnectorStatusDTO();
         long start = System.currentTimeMillis();
 
         Response resp = http.get(BASE_URL);
@@ -116,6 +115,20 @@ public class LesteTelecom implements Connector {
         }
 
         log.info("Logoff method called for {}", NAME);
+        return response;
+    }
+
+    @Override
+    public AuthenticateDTO executeOperation(String username, String password) {
+        AuthenticateDTO response = new AuthenticateDTO();
+        
+        checkConnStatus();
+        authenticate(username, password);
+        logoff();
+        
+        response.setStatusCode(200);
+        response.setSuccess(true);
+        response.setMessage("Operação realizada com sucesso");
         return response;
     }
 

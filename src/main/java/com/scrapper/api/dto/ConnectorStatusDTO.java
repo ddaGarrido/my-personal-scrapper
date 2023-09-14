@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class SiteStatusDTO extends SiteStatus{
+public class ConnectorStatusDTO extends SiteStatus{
     //basics
     private int statusCode;
     private long responseTime; // em milissegundos

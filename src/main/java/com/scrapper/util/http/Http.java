@@ -8,13 +8,20 @@ import org.jsoup.Connection.Response;
 import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.scrapper.models.RequestLog;
+import com.scrapper.service.OperationService;
 
 @Component
 public class Http {
 
     private static final Logger log = LoggerFactory.getLogger(Http.class);
     public Connection connection;
+
+    @Autowired
+    private OperationService operationService = new OperationService();
 
     public Http() {
         connection = Jsoup.newSession();
@@ -34,6 +41,7 @@ public class Http {
             }
             Response response = connection.execute();
             response.bufferUp();
+            operationService.addRequest(new RequestLog(url, response.headers(), response.cookies(), response.body(), "GET", response.body()));
             return response;
         } catch (IOException e) {
             log.error("Error executing GET request to {}: {}", url, e.getMessage());
@@ -60,6 +68,7 @@ public class Http {
             }
             Response response = connection.execute();
             response.bufferUp();
+            operationService.addRequest(new RequestLog(url, response.headers(), response.cookies(), response.body(), "POST", response.body()));
             return response;
         } catch (IOException e) {
             log.error("Error executing POST request to {}: {}", url, e.getMessage());

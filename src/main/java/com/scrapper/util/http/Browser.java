@@ -1,6 +1,11 @@
 package com.scrapper.util.http;
 
 import org.jsoup.Connection.Response;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.scrapper.models.RequestLog;
+import com.scrapper.service.OperationService;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +16,9 @@ public class Browser {
     private FormData formData;
     private Cookies cookies;
     private Headers headers;
+
+    @Autowired
+    private OperationService operationService;
 
     public Browser() {
         this.history = new ArrayList<>();
@@ -24,6 +32,7 @@ public class Browser {
         Response response = httpUtil.get(url, formData, headers, cookies);
         updateState(response);
         history.add(response);
+        operationService.addRequest(new RequestLog(url, response.headers(), response.cookies(), response.body(), "GET", response.body()));
         return response;
     }
 
@@ -34,6 +43,7 @@ public class Browser {
         Response response = httpUtil.post(url, body, combinedHeaders, cookies);
         updateState(response);
         history.add(response);
+        operationService.addRequest(new RequestLog(url, response.headers(), response.cookies(), response.body(), "POST", response.body()));
         return response;
     }
 

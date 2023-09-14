@@ -12,7 +12,7 @@ import com.scrapper.service.WebService;
 import java.util.Map;
 
 @RestController
-public class WebController {
+public class ApiController {
     @Autowired
     protected WebService webService;
 

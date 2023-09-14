@@ -3,7 +3,7 @@ package com.scrapper.connectors.web.enel;
 import org.springframework.stereotype.Component;
 
 import com.scrapper.api.dto.AuthenticateDTO;
-import com.scrapper.api.dto.SiteStatusDTO;
+import com.scrapper.api.dto.ConnectorStatusDTO;
 import com.scrapper.connectors.Connector;
 import com.scrapper.util.http.Browser;
 import com.scrapper.util.http.FormData;
@@ -24,7 +24,7 @@ public class Enel implements Connector {
     private static final Logger log = LoggerFactory.getLogger(Enel.class);
     private final Browser browser;
 
-    protected static final int ID = 3;
+    protected static final int ID = 2;
     protected static final String NAME = "Enel";
     protected static final String BASE_URL = "https://www.enel.com.br/pt/login.html";
 
@@ -33,8 +33,8 @@ public class Enel implements Connector {
     }
 
     @Override
-    public SiteStatusDTO checkSiteStatus() {
-        SiteStatusDTO response = new SiteStatusDTO();
+    public ConnectorStatusDTO checkConnStatus() {
+        ConnectorStatusDTO response = new ConnectorStatusDTO();
         long start = System.currentTimeMillis();
 
         //Response resp = browser.get(BASE_URL);
@@ -150,20 +150,25 @@ public class Enel implements Connector {
         return response;
     }
 
-    public Map<String, Object> executeFullFlow(String username, String password) {
-        Map<String, Object> collectedData = new HashMap<>();
+    @Override
+    public AuthenticateDTO executeOperation(String username, String password) {
+        AuthenticateDTO response = new AuthenticateDTO();
+        
+        Document doc = http.getDocument();
 
-        // Passo 1: Verificar status do site
-        SiteStatusDTO siteStatus = checkSiteStatus();
-        collectedData.put("siteStatus", siteStatus);
+        if (!doc.getElementsContainingOwnText("Sair").isEmpty()) {
+            Response resp = http.get("https://central.lestetelecom.com.br/soucliente/sair");
+            response.setStatusCode(resp.statusCode());
+            response.setSuccess(true);
+            response.setMessage("Logout realizado com sucesso");
+        } else {
+            response.setStatusCode(500);
+            response.setSuccess(false);
+            response.setMessage("Erro ao realizar logout");
+        }
 
-        // Passo 2: Autenticar
-        AuthenticateDTO authResponse = authenticate(username, password);
-        collectedData.put("authentication", authResponse);
-
-        // ... (outros passos conforme necessário)
-
-        return collectedData;
+        log.info("Logoff method called for {}", NAME);
+        return response;
     }
 
     public static String formatarCPF(String cpf){

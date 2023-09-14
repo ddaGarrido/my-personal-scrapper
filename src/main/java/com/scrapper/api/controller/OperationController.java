@@ -15,7 +15,6 @@ import com.scrapper.service.OperationService;
 @RestController
 @RequestMapping("/operation")
 public class OperationController extends ApiController{
-    private static final Logger log = LoggerFactory.getLogger(OperationController.class);
 
     @Autowired
     private OperationService operationService;

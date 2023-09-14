@@ -5,7 +5,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.concurrent.CompletableFuture;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +44,7 @@ public class OperationService {
 
     @Async
     public CompletableFuture<AuthenticateDTO> executeOperation(int connectorId, String username, String password) {
-        Connector connector = WebService.getConnector(connectorId);
+        Connector connector = ConnectorService.getConnector(connectorId);
         AuthenticateDTO authenticateDto = connector.executeOperation(username, password);
         saveOperationToFile();
 

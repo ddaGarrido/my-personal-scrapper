@@ -1,22 +1,22 @@
 package com.scrapper.util.http;
 
-import java.util.Map;
-
 import org.springframework.stereotype.Component;
+
+import java.util.LinkedHashMap;
 
 @Component
 public class FormData {
-    private Map<String, String> data;
+    private LinkedHashMap<String, String> data;
 
     public FormData() {
-        this.data = new java.util.HashMap<String, String>();
+        this.data = new LinkedHashMap<String, String>();
     }
 
-    public FormData(Map<String, String> data) {
+    public FormData(LinkedHashMap<String, String> data) {
         this.data = data;
     }
 
-    public Map<String, String> getData() {
+    public LinkedHashMap<String, String> getData() {
         return data;
     }
 

@@ -5,6 +5,8 @@ import com.scrapper.api.dto.ConnectorsDTO;
 import com.scrapper.api.dto.ConnectorStatusDTO;
 import com.scrapper.connectors.Connector;
 
+import com.scrapper.models.connector.Status;
+import com.scrapper.util.http.Browser;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.cache.annotation.Cacheable;
@@ -16,11 +18,13 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 @Service
-public class WebService {
+public class ConnectorService {
     private static List<Connector> connectors = new ArrayList<>();
-    private static final Logger log = LoggerFactory.getLogger(WebService.class);
+    private static final Logger log = LoggerFactory.getLogger(ConnectorService.class);
 
-    public WebService(List<Connector> availableConnectors) {
+    private final Browser browser = new Browser();
+
+    public ConnectorService(List<Connector> availableConnectors) {
         log.info("\n\nNumber of connectors detected: " + availableConnectors.size() + "\n\n");
         connectors = availableConnectors;
     }
@@ -36,11 +40,11 @@ public class WebService {
 
     @Cacheable("connectorStatus")
     @Async
-    public CompletableFuture<ConnectorStatusDTO> checkConnStatus(int connectorId) {
+    public CompletableFuture<Status> checkConnStatus(int connectorId) {
         Connector connector = getConnector(connectorId);
-        ConnectorStatusDTO checkDto = connector.checkConnStatus();
+        Status checkStatus = connector.checkConnStatus(browser);
 
-        return CompletableFuture.completedFuture(checkDto);
+        return CompletableFuture.completedFuture(checkStatus);
     }
 
     @Async

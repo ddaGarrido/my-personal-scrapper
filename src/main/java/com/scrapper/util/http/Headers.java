@@ -1,20 +1,19 @@
 package com.scrapper.util.http;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.LinkedHashMap;
 
 public class Headers {
-    private Map<String, String> headers = new HashMap<>();
+    private LinkedHashMap<String, String> headers = new LinkedHashMap<>();
 
     public void set(String key, String value) {
         headers.put(key, value);
     }
 
-    public void setAll(Map<String, String> newHeaders) {
+    public void setAll(LinkedHashMap<String, String> newHeaders) {
         headers = newHeaders;
     }
 
-    public void putAll(Map<String, String> newHeaders) {
+    public void putAll(LinkedHashMap<String, String> newHeaders) {
         headers.putAll(newHeaders);
     }
 
@@ -26,7 +25,7 @@ public class Headers {
         headers.remove(key);
     }
 
-    public Map<String, String> getAll() {
+    public LinkedHashMap<String, String> getAll() {
         return headers;
     }
 }

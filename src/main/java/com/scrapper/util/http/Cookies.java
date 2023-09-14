@@ -1,20 +1,19 @@
 package com.scrapper.util.http;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.LinkedHashMap;
 
 public class Cookies {
-    private Map<String, String> cookies = new HashMap<>();
+    private LinkedHashMap<String, String> cookies = new LinkedHashMap<>();
 
     public void set(String key, String value) {
         cookies.put(key, value);
     }
 
-    public void setAll(Map<String, String> newCookies) {
+    public void setAll(LinkedHashMap<String, String> newCookies) {
         cookies = newCookies;
     }
 
-    public void putAll(Map<String, String> newCookies) {
+    public void putAll(LinkedHashMap<String, String> newCookies) {
         cookies.putAll(newCookies);
     }
 
@@ -26,7 +25,7 @@ public class Cookies {
         cookies.remove(key);
     }
 
-    public Map<String, String> getAll() {
+    public LinkedHashMap<String, String> getAll() {
         return cookies;
     }
 }

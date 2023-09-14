@@ -1,9 +1,11 @@
 package com.scrapper.util.http;
 
-import org.jsoup.Connection.Response;
+import org.jsoup.Connection;
+import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.scrapper.models.RequestLog;
+import com.scrapper.util.http.Response;
 import com.scrapper.service.OperationService;
 
 import java.util.ArrayList;
@@ -17,9 +19,6 @@ public class Browser {
     private Cookies cookies;
     private Headers headers;
 
-    @Autowired
-    private OperationService operationService;
-
     public Browser() {
         this.history = new ArrayList<>();
         this.httpUtil = new Http();
@@ -28,27 +27,25 @@ public class Browser {
         this.headers = new Headers();
     }
 
-    public Response get(String url) {
-        Response response = httpUtil.get(url, formData, headers, cookies);
-        updateState(response);
-        history.add(response);
-        operationService.addRequest(new RequestLog(url, response.headers(), response.cookies(), response.body(), "GET", response.body()));
+    public Response navigate(String url) {
+        Response response = httpUtil.get(url);
+
         return response;
     }
 
-    public Response post(String url, Map<String, String> customHeaders, String body) {
-        Headers combinedHeaders = new Headers();
-        combinedHeaders.setAll(headers.getAll());
-        combinedHeaders.putAll(customHeaders);
-        Response response = httpUtil.post(url, body, combinedHeaders, cookies);
-        updateState(response);
-        history.add(response);
-        operationService.addRequest(new RequestLog(url, response.headers(), response.cookies(), response.body(), "POST", response.body()));
-        return response;
-    }
+    // public Response send(String url, Map<String, String> customHeaders, String body) {
+    //     Headers combinedHeaders = new Headers();
+    //     combinedHeaders.setAll(headers.getAll());
+    //     combinedHeaders.putAll(customHeaders);
+    //     Response response = httpUtil.post(url, body, combinedHeaders, cookies);
+    //     updateState(response);
+    //     history.add(response);
+    //     operationService.addRequest(new RequestLog(url, response.headers(), response.cookies(), response.body(), "POST", response.body()));
+    //     return response;
+    // }
 
-    private void updateState(Response response) {
-        cookies.setAll(response.cookies());
-        headers.setAll(response.headers());
-    }
+    // private void updateState(Response response) {
+    //     cookies.setAll(response.cookies());
+    //     headers.setAll(response.headers());
+    // }
 }

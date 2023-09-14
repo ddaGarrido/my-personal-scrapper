@@ -1,5 +1,7 @@
 package com.scrapper.connectors;
 
+import com.scrapper.models.connector.Status;
+import com.scrapper.util.http.Browser;
 import org.springframework.stereotype.Component;
 
 import com.scrapper.api.dto.AuthenticateDTO;
@@ -18,7 +20,7 @@ public interface Connector {
     public Http http = new Http();
 
     // Verifica a disponibilidade do site
-    public abstract ConnectorStatusDTO checkConnStatus();
+    public abstract Status checkConnStatus(Browser browser);
 
     // Autentica no site usando credenciais fornecidas
     public abstract AuthenticateDTO authenticate(String username, String password);

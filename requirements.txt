@@ -1,3 +1,4 @@
+docker --help
 # Construir a imagem Docker
 docker build .
 # Executar o container

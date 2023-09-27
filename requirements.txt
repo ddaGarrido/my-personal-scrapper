@@ -1,4 +1,4 @@
-docker --help
+pip install docker
 # Construir a imagem Docker
 docker build .
 # Executar o container

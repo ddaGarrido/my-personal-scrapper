@@ -1,5 +1,5 @@
-pip install docker
+RUN pip install docker
 # Construir a imagem Docker
-docker build .
+RUN docker build .
 # Executar o container
-#docker run
+#RUN docker run

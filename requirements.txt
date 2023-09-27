@@ -9,7 +9,7 @@
 
 
 # Construir a imagem Docker
-docker build -t your_project_name .
-
+#docker build -t your_project_name .
+docker
 # Executar o container
 #docker run -p 8000:8000 your_project_name

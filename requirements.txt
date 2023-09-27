@@ -1,15 +1,4 @@
-#run spring boot app 
-#./mvnw spring-boot:run
-
-#rodar container em debug
-#docker run -p 8080:8080 -p 5005:5005 your-image-name
-#Na sua IDE (como IntelliJ IDEA, Eclipse, etc.), configure uma conexão de debug remoto para localhost:5005.
-
-
-
-
 # Construir a imagem Docker
-#docker build -t your_project_name .
-docker
+docker build .
 # Executar o container
-#docker run -p 8000:8000 your_project_name
+#docker run

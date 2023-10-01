@@ -50,7 +50,7 @@ public class ConnectorService {
     @Async
     public CompletableFuture<AuthenticateDTO> authenticate(int connectorId, String username, String password) {
         Connector connector = getConnector(connectorId);
-        AuthenticateDTO authenticateDto = connector.authenticate(username, password);
+        AuthenticateDTO authenticateDto = connector.authenticate(browser, username, password);
 
         return CompletableFuture.completedFuture(authenticateDto);
     }
@@ -58,7 +58,7 @@ public class ConnectorService {
     @Async
     public CompletableFuture<AuthenticateDTO> logoff(int connectorId) {
         Connector connector = getConnector(connectorId);
-        AuthenticateDTO authenticateDto = connector.logoff();
+        AuthenticateDTO authenticateDto = connector.logoff(browser);
 
         return CompletableFuture.completedFuture(authenticateDto);
     }

@@ -23,13 +23,13 @@ public interface Connector {
     public abstract Status checkConnStatus(Browser browser);
 
     // Autentica no site usando credenciais fornecidas
-    public abstract AuthenticateDTO authenticate(String username, String password);
+    public abstract AuthenticateDTO authenticate(Browser browser, String username, String password);
 
     // Desloga do site
-    public abstract AuthenticateDTO logoff();
+    public abstract AuthenticateDTO logoff(Browser browser);
 
     // Executa operaçao no site
-    public abstract AuthenticateDTO executeOperation(String username, String password);
+    public abstract AuthenticateDTO executeOperation(Browser browser, String username, String password);
 
     // ... qualquer outro método comum que você queira adicionar ...
 }

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ApiController {
     @GetMapping("/")
-    public ResponseEntity<?> info() {
+    private ResponseEntity<?> info() {
         return ResponseEntity.ok("API Scrapper - Versão 1.0.0");
     }
 }

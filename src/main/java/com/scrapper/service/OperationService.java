@@ -45,7 +45,7 @@ public class OperationService {
     @Async
     public CompletableFuture<AuthenticateDTO> executeOperation(int connectorId, String username, String password) {
         Connector connector = ConnectorService.getConnector(connectorId);
-        AuthenticateDTO authenticateDto = connector.executeOperation(username, password);
+        AuthenticateDTO authenticateDto = connector.executeOperation(null, username, password);
         saveOperationToFile();
 
         return CompletableFuture.completedFuture(authenticateDto);

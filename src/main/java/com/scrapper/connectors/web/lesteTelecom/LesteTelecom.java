@@ -33,22 +33,27 @@ public class LesteTelecom implements Connector {
     }
 
     @Override
-    public AuthenticateDTO authenticate(String username, String password) {
+    public AuthenticateDTO authenticate(Browser browser, String username, String password) {
         AuthenticateDTO response = new AuthenticateDTO();
+
+        response.setMessage("Not Implemented");
+        return response;
+    }
+
+    @Override
+    public AuthenticateDTO logoff(Browser browser) {
+        AuthenticateDTO response = new AuthenticateDTO();
+
+        response.setMessage("Not Implemented");
 
         return response;
     }
 
     @Override
-    public AuthenticateDTO logoff() {
+    public AuthenticateDTO executeOperation(Browser browser, String username, String password) {
         AuthenticateDTO response = new AuthenticateDTO();
 
-        return response;
-    }
-
-    @Override
-    public AuthenticateDTO executeOperation(String username, String password) {
-        AuthenticateDTO response = new AuthenticateDTO();
+        response.setMessage("Not Implemented");
 
         return response;
     }

@@ -14,12 +14,12 @@ import com.scrapper.service.OperationService;
 
 @RestController
 @RequestMapping("/operation")
-public class OperationController extends ApiController{
+public class OperationController {
 
     @Autowired
     private OperationService operationService;
 
-    @PostMapping("/{connectorId}/execute")
+    @PostMapping("/{connectorId}")
     public ResponseEntity<String> executeOperation(
         @PathVariable int connectorId,
         @Param(value = "") String username,

@@ -20,7 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/connectors")
-public class ConnectorController extends ApiController{
+public class ConnectorController {
     private static final Logger log = LoggerFactory.getLogger(ConnectorController.class);
 
     @Autowired
@@ -29,6 +29,7 @@ public class ConnectorController extends ApiController{
     @GetMapping(value = {""})
     public ResponseEntity<?> getConnectors() {
         log.info("getConnectors - Fetching all connectors");
+
 
         List<ConnectorsDTO> connList = connectorService.getConnectors();
 
@@ -44,7 +45,7 @@ public class ConnectorController extends ApiController{
         Status connStatus = connectorService.checkConnStatus(connectorId).join();
 
         if (connStatus.getStatusCode() != 200) {
-            return ResponseEntity.badRequest().body("error");
+            return ResponseEntity.badRequest().body(connStatus);
         } else {
             return ResponseEntity.ok(connStatus);
         }

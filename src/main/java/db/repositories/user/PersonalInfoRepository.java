@@ -1,9 +1,11 @@
 package db.repositories.user;
 
 import db.models.user.PersonalInfo;
-import db.repositories.AbstractRepository;
+import db.repositories.GenRepository;
+import org.springframework.stereotype.Repository;
 
-public class PersonalInfoRepository extends AbstractRepository<PersonalInfo> {
+@Repository
+public class PersonalInfoRepository extends GenRepository<PersonalInfo> {
 
     public PersonalInfoRepository() {
         super("PersonalInfos", PersonalInfo.class);

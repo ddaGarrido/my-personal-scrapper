@@ -1,18 +1,13 @@
 package com.scrapper.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.scrapper.models.Operation;
+import com.scrapper.models.RequestLog;
+import org.springframework.stereotype.Service;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.concurrent.CompletableFuture;
-
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Service;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.scrapper.api.dto.AuthenticateDTO;
-import com.scrapper.connectors.Connector;
-import com.scrapper.models.Operation;
-import com.scrapper.models.RequestLog;
 
 @Service
 public class OperationService {
@@ -42,12 +37,12 @@ public class OperationService {
         }
     }
 
-    @Async
-    public CompletableFuture<AuthenticateDTO> executeOperation(int connectorId, String username, String password) {
-        Connector connector = ConnectorService.getConnector(connectorId);
-        AuthenticateDTO authenticateDto = connector.executeOperation(null, username, password);
-        saveOperationToFile();
-
-        return CompletableFuture.completedFuture(authenticateDto);
-    }
+//    @Async
+//    public CompletableFuture<AuthenticateDTO> executeOperation(int connectorId, String username, String password) {
+//        Connector connector = ConnectorService.getConnector(connectorId);
+//        AuthenticateDTO authenticateDto = connector.executeOperation(null, username, password);
+//        saveOperationToFile();
+//
+//        return CompletableFuture.completedFuture(authenticateDto);
+//    }
 }

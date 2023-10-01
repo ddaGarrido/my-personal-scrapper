@@ -1,10 +1,12 @@
 package db.repositories;
 
-import db.models.Connector;
+import db.models.ConnectorModel;
+import org.springframework.stereotype.Repository;
 
-public class ConnectorRepository extends AbstractRepository<Connector> {
+@Repository
+public class ConnectorRepository extends GenRepository<ConnectorModel> {
 
     public ConnectorRepository() {
-        super("Connectors", Connector.class);
+        super("Connectors", ConnectorModel.class);
     }
 }

@@ -4,31 +4,34 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import db.MongoDBConfig;
+import jakarta.annotation.PostConstruct;
 import org.bson.types.ObjectId;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractRepository<T> implements Repository<T> {
+@Repository
+public abstract class GenRepository<T> {
 
     protected final MongoCollection<T> collection;
 
-    public AbstractRepository(String collectionName, Class<T> clazz) {
+    public GenRepository(String collectionName, Class<T> clazz) {
         MongoDatabase database = MongoDBConfig.getDatabase();
         collection = database.getCollection(collectionName, clazz);
     }
 
-    @Override
+    @PostConstruct
     public T findById(ObjectId id) {
         return collection.find(Filters.eq("_id", id)).first();
     }
 
-    @Override
+    @PostConstruct
     public List<T> findAll() {
         return collection.find().into(new ArrayList<>());
     }
 
-    @Override
+    @PostConstruct
     public void save(T t) {
         collection.insertOne(t);
     }

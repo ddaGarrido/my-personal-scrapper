@@ -11,10 +11,16 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Connector extends DBModel{
+public class ConnectorModel extends DBModel{
     @Id
     private ObjectId connectorId;
     private String name;
     private String type;
     private String status;
+
+    public ConnectorModel(String name, String type, String status) {
+        this.name = name;
+        this.type = type;
+        this.status = status;
+    }
 }

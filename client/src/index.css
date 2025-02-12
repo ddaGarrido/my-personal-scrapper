@@ -1,0 +1,43 @@
+/* src/index.css */
+:root {
+  /* Cores do tema light */
+  --background-light: #ffffff;
+  --surface-light: #f8f9fa;
+  --text-light: #333333;
+  --primary-light: #1abc9c;
+  --secondary-light: #ff6b6b;
+  --hover-light: #16a085;
+
+  /* Cores do tema dark */
+  --background-dark: #121212;
+  --surface-dark: #1e1e1e;
+  --text-dark: #ffffff;
+  --primary-dark: #1abc9c;
+  --secondary-dark: #ff6b6b;
+  --hover-dark: #16a085;
+
+  /* Variáveis padrão (inicialmente light) */
+  --background: var(--background-light);
+  --surface: var(--surface-light);
+  --text: var(--text-light);
+  --primary: var(--primary-light);
+  --secondary: var(--secondary-light);
+  --hover: var(--hover-light);
+}
+
+/* Aplicar as variáveis ao corpo da aplicação */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--background);
+  color: var(--text);
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--hover);
+}

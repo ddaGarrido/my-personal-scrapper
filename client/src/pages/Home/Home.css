@@ -1,0 +1,13 @@
+/* src/pages/Home/Home.css */
+.home {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .home h1 {
+    color: var(--text-dark);
+  }
+  
+  .home p {
+    color: #666;
+  }

@@ -1,7 +1,7 @@
 // src/components/layout/Sidebar.jsx
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { ThemeContext } from '../../ThemeContext';
+import { ThemeContext } from '../ThemeContext';
 import './Sidebar.css';
 
 const Sidebar = () => {

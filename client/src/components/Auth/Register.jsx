@@ -45,7 +45,7 @@ const Register = () => {
             <form onSubmit={handleRegistration}>
                 <h1>Register</h1>
                 <div className="input-box">
-                    <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                    <input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
                     <MdEmail className="icon" />
                 </div>
                 <div className="input-box">
